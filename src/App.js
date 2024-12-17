@@ -12,7 +12,14 @@ function TodoList () {
   
   function handleSubmit(e) {
     e.preventDefault();
-    setTodos([...todos, inputValue]);
+    if (!inputValue.trim()) return;
+
+    if (todos.some(todo => todo.toLowerCase() === inputValue.trim().toLowerCase())) {
+      alert('This already exists in your list');
+      return;
+    }
+
+    setTodos([...todos, inputValue.trim()]);
     setInputValue('');
   }
 
