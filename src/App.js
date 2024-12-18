@@ -63,7 +63,7 @@ export default function TodoList() {
         {Array.isArray(todos) ? todos.map((todo, index) => (
           <li key={index}>
             {todo.name}
-            <button onClick={() => handleDelete(index)}>Delete</button> 
+            <button onClick={() => handleDelete(index)}>Delete</button>
           </li>
         )) : null}
       </ul>
