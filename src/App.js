@@ -46,12 +46,12 @@ export default function TodoList() {
 
   if (!todos) return "No post!";
 
-  const handleDelete = (id) => {
+  const handleDelete = (index) => {
     const newTodos = [...todos];
-    newTodos.splice(id, 1);
+    newTodos.splice(index, 1);
     setTodos(newTodos);
 
-    axios.delete(`${baseUrl}/${id}`)
+    axios.delete(`${baseUrl}/${index}`)
       .then(() => {
         setTodos(newTodos);
       });
