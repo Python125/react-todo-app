@@ -39,9 +39,8 @@ export default function TodoList() {
     axios.post(baseUrl, newUser)
       .then((response) => {
         setTodos([...todos, response.data]);
-    });
-
-    setInputValue('');
+        setInputValue('');
+      });
   }
 
   if (!todos) return "No post!";
@@ -49,7 +48,6 @@ export default function TodoList() {
   const handleDelete = (index) => {
     const newTodos = [...todos];
     newTodos.splice(index, 1);
-    setTodos(newTodos);
 
     axios.delete(`${baseUrl}/${index}`)
       .then(() => {
