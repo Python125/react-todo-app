@@ -1,14 +1,28 @@
 // import logo from './logo.svg';
 import './App.css';
 import { React, useState, useEffect } from 'react';
+/*
+  "useState" is a React tool that helps your component remember information even after it updates
+  "useEffect" is a React tool that lets you
+*/
 import axios from 'axios';
 
 const baseUrl = 'http://localhost:8000/todos';
 
-export default function TodoList() {
-  const [todos, setTodos] = useState([]);
-  const [inputValue, setInputValue] = useState('');
-
+function TodoList() { // Declaring a function called TodoList with no parameters as input
+// In React, "TodoList" is a component
+  const [todos, setTodos] = useState([]); // Creates a list to store multiple todos
+  /*
+    "todos" is a variable that will store the list of todos - like a box that holds todos
+    "setTodos" is a function that lets you update what's stored in "todos"
+    "useState([])" creates a new memory space that starts with an empty array
+  */
+  const [inputValue, setInputValue] = useState(''); // Creates a variable to store the new list item
+  /*
+    "inputValue" is a variable that will store the new todo name
+    "setInputValue" is a function that lets you update what's stored in "inputValue"
+    "useState('')" creates a new memory space that starts with an empty string
+  */
   useEffect(() => {
     axios.get(baseUrl).then((response) => {
       setTodos(response.data);
@@ -17,8 +31,8 @@ export default function TodoList() {
 
   if (!todos) return null;
   
-  function handleChange(e) {
-    setInputValue(e.target.value);
+  function handleChange(e) { // This function is triggered when the user clicks the "Add Todo" button
+    setInputValue(e.target.value); // This keeps track of what the user is typing in the input box
   }
   
   function handleSubmit(e) {
@@ -55,17 +69,17 @@ export default function TodoList() {
       });
   }
 
-  return (
-    <div>
-      <h1>Todo List</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="text" value={inputValue} onChange={handleChange} />
-        <button>Add Todo</button>
+  return ( // The return statement stops the function and sends back whatever is inside the return statement
+    <div> {/* The div tags define a section in the HTML (JSX) */}
+      <h1>Todo List</h1> {/* The h tags (in this case, h1) define HTML headings */}
+      <form onSubmit={handleSubmit}> {/* The form tags are used for collecting information from a user(s) */}
+        <input type="text" value={inputValue} onChange={handleChange} /> {/* An input tag is used to allow a user to fill in a text box */}
+        <button>Add Todo</button> {/* The button tag is used to trigger an action */}
       </form>
-      <ul>
+      <ul> {/* The ul tags define an unordered list of items */}
         {Array.isArray(todos) ? todos.map((todo, index) => (
-          <li key={index}>
-            {todo.name}
+          <li key={index}> {/* The li tags define a list item */}
+            {todo.name} {/* The todo.name is the name of the todo */}
             <button onClick={() => handleDelete(index)}>Delete</button>
           </li>
         )) : null}
@@ -73,3 +87,5 @@ export default function TodoList() {
     </div>
   );
 }
+
+export default TodoList;
