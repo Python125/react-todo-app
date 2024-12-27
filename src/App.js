@@ -6,6 +6,7 @@ import { React, useState, useEffect } from 'react';
   "useEffect" is a React tool that lets you perform "side effects" in your components - side effects are operations that happen "on the side" (e.g. fetching data from an API)
 */
 import axios from 'axios'; // "axios" is a library that makes it easier to make HTTP requests, such as GET, POST, PUT, and DELETE requests
+import EditTodo from './components/Todo';
 
 const baseUrl = 'http://localhost:8000/todos'; // This is the URL where your API is running
 
@@ -23,6 +24,8 @@ function TodoList() { // Declaring a function called TodoList with no parameters
     "setInputValue" is a function that lets you update what's stored in "inputValue"
     "useState('')" creates a new memory space that starts with an empty string
   */
+  const [editId, setEditId] = useState(null);
+ 
   useEffect(() => {
     axios.get(baseUrl).then((response) => {
       setTodos(response.data);
@@ -34,7 +37,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
   function handleChange(e) { // This function is triggered when the user clicks the "Add Todo" button
     setInputValue(e.target.value); // This keeps track of what the user is typing in the input box
   }
-  
+ 
   function handleSubmit(e) {
     e.preventDefault();
     if (!inputValue.trim()) return;
@@ -59,15 +62,24 @@ function TodoList() { // Declaring a function called TodoList with no parameters
 
   if (!todos) return "No post!";
 
-  const handleDelete = (index) => {
-    const newTodos = [...todos];
-    newTodos.splice(index, 1);
+  const handleDelete = (id) => {
+    const newTodos = [...todos].filter(todo => todo.id !== id);
 
-    axios.delete(`${baseUrl}/${index}`)
+    axios.delete(`${baseUrl}/${id}`)
       .then(() => {
         setTodos(newTodos);
       });
   }
+
+  const handleUpdate = (id, name) => {
+    const newTodos = [...todos].map(todo => todo.id === id ? { ...todo, name: name } : todo); // Creates a new array of todos where the todo with the matching id has its name updated
+
+    axios.put(`${baseUrl}/${id}`, { name: name }) // Sends a PUT request to update the todo on the server
+      .then(() => {
+        setTodos(newTodos);
+      })
+  }
+  
 
   return ( // The return statement stops the function and sends back whatever is inside the return statement
     <div> {/* The div tags define a section in the HTML (JSX) */}
@@ -77,12 +89,19 @@ function TodoList() { // Declaring a function called TodoList with no parameters
         <button>Add Todo</button> {/* The button tag is used to trigger an action */}
       </form>
       <ul> {/* The ul tags define an unordered list of items */}
-        {Array.isArray(todos) ? todos.map((todo, index) => (
-          <li key={index}>
-            {todo.name} {/* The todo.name is the name of the todo */}
-            <button onClick={() => handleDelete(index)}>Delete</button>
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            {editId === todo.id ? (
+              <EditTodo todo={todo} onSave={handleUpdate} onCancel={() => setEditId(null)} />
+            ) : (
+              <>
+                {todo.name} {/* The todo.name is the name of the todo */}
+                <button onClick={() => handleDelete(todo.id)}>Delete</button>
+                <button onClick={() => setEditId(todo.id)}>Edit</button>
+              </>
+            )}
           </li>
-        )) : null}
+        ))}
       </ul>
     </div>
   );
