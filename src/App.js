@@ -9,6 +9,8 @@ import axios from 'axios'; // "axios" is a library that makes it easier to make 
 import EditTodo from './components/Todo';
 
 const baseUrl = 'http://localhost:8000/todos'; // This is the URL where your API is running
+const secondaryUrl = 'http://localhost:8000';
+
 
 function TodoList() { // Declaring a function called TodoList with no parameters as input
 // In React, "TodoList" is a component
@@ -50,7 +52,6 @@ function TodoList() { // Declaring a function called TodoList with no parameters
     const newUser = {
       id: todos.length + 1,
       name: inputValue.trim(),
-      age: 20,
     }
 
     axios.post(baseUrl, newUser)
@@ -74,7 +75,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
   const handleUpdate = (id, name) => {
     const newTodos = [...todos].map(todo => todo.id === id ? { ...todo, name: name } : todo); // Creates a new array of todos where the todo with the matching id has its name updated
 
-    axios.put(`${baseUrl}/${id}`, { name: name }) // Sends a PUT request to update the todo on the server
+    axios.put(`${secondaryUrl}/${id}`, { name: name }) // Sends a PUT request to update the todo on the server
       .then(() => {
         setTodos(newTodos);
       })
@@ -96,8 +97,8 @@ function TodoList() { // Declaring a function called TodoList with no parameters
             ) : (
               <>
                 {todo.name} {/* The todo.name is the name of the todo */}
-                <button onClick={() => handleDelete(todo.id)}>Delete</button>
                 <button onClick={() => setEditId(todo.id)}>Edit</button>
+                <button onClick={() => handleDelete(todo.id)}>Delete</button>
               </>
             )}
           </li>

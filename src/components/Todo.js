@@ -4,13 +4,13 @@ function EditTodo({ todo, onSave, onCancel }) {
     const [editValue, setEditValue] = useState(todo.name);
   
     const handleEditChange = (e) => {
-      setEditValue(e.target.value);
+      setEditValue(e.target.value); // This updates the input field whenever the user types in it
     };
   
-    const handleEditSubmit = (e) => {
-      e.preventDefault();
-      if (!editValue.trim()) return;
-      onSave(todo.id, editValue); // Saves the edited todo
+    const handleEditSubmit = (e) => { // This is the function that is called when the user clicks the save button
+      e.preventDefault(); // Prevents the page from reloading
+      if (!editValue.trim()) return; // This makes sure that their are characters in the input field
+      onSave(todo.id, editValue); // This saves the edited todo
     };
   
     return (
