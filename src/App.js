@@ -64,7 +64,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
   if (!todos) return "No post!";
 
   const handleDelete = (id) => {
-    const newTodos = [...todos].filter(todo => todo.id !== id);
+    const newTodos = [...todos].filter(todo => todo.id !== id); // Creates a new array of todos where the todo with the matching id is removed
 
     axios.delete(`${baseUrl}/${id}`)
       .then(() => {
@@ -77,8 +77,9 @@ function TodoList() { // Declaring a function called TodoList with no parameters
 
     axios.put(`${secondaryUrl}/${id}`, { name: name }) // Sends a PUT request to update the todo on the server
       .then(() => {
-        setTodos(newTodos);
-      })
+        setTodos(newTodos); // This updates the todos list with the new todos
+      });
+      setEditId(null); // Exits the edit mode, therefore returning to its original state
   }
   
 
