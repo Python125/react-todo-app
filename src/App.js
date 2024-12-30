@@ -7,6 +7,7 @@ import { React, useState, useEffect } from 'react';
 */
 import axios from 'axios'; // "axios" is a library that makes it easier to make HTTP requests, such as GET, POST, PUT, and DELETE requests
 import EditTodo from './components/Todo';
+import { FcCheckmark } from "react-icons/fc";
 
 const baseUrl = 'http://localhost:8000/todos'; // This is the URL where your API is running
 const secondaryUrl = 'http://localhost:8000';
@@ -90,6 +91,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
         <input type="text" value={inputValue} onChange={handleChange} />
         <button>Add Todo</button> {/* The button tag is used to trigger an action */}
       </form>
+      <h5>Uncompleted</h5>
       <ul> {/* The ul tags define an unordered list of items */}
         {todos.map((todo) => (
           <li key={todo.id}>
@@ -102,6 +104,16 @@ function TodoList() { // Declaring a function called TodoList with no parameters
                 <button onClick={() => handleDelete(todo.id)}>Delete</button>
               </>
             )}
+          </li>
+        ))}
+      </ul>
+
+      <h5>Completed</h5>
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            {todo.name}
+            <FcCheckmark />
           </li>
         ))}
       </ul>
