@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FaSave } from "react-icons/fa";
+import { FcCancel } from "react-icons/fc";
 
 function EditTodo({ todo, onSave, onCancel }) {
     const [editValue, setEditValue] = useState(todo.name);
@@ -16,8 +18,8 @@ function EditTodo({ todo, onSave, onCancel }) {
     return (
       <form onSubmit={handleEditSubmit}>
         <input type="text" value={editValue} onChange={handleEditChange} />
-        <button type="submit">Save</button>
-        <button type="button" onClick={onCancel}>Cancel</button>
+        <button type="submit"><FaSave /></button>
+        <button type="button" onClick={onCancel}><FcCancel /></button>
       </form>
     );
   }

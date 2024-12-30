@@ -8,6 +8,8 @@ import { React, useState, useEffect } from 'react';
 import axios from 'axios'; // "axios" is a library that makes it easier to make HTTP requests, such as GET, POST, PUT, and DELETE requests
 import EditTodo from './components/Todo';
 import { FcCheckmark } from "react-icons/fc";
+import { FcEditImage } from "react-icons/fc";
+import { FcEmptyTrash } from "react-icons/fc";
 
 const baseUrl = 'http://localhost:8000/todos'; // This is the URL where your API is running
 const secondaryUrl = 'http://localhost:8000';
@@ -28,6 +30,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
     "useState('')" creates a new memory space that starts with an empty string
   */
   const [editId, setEditId] = useState(null);
+  const [completedTodo, setCompletedTodo] = useState();
  
   useEffect(() => {
     axios.get(baseUrl).then((response) => {
@@ -100,8 +103,9 @@ function TodoList() { // Declaring a function called TodoList with no parameters
             ) : (
               <>
                 {todo.name} {/* The todo.name is the name of the todo */}
-                <button onClick={() => setEditId(todo.id)}>Edit</button>
-                <button onClick={() => handleDelete(todo.id)}>Delete</button>
+                <button onClick={() => setEditId(todo.id)}><FcEditImage /></button>
+                <button onClick={() => handleDelete(todo.id)}><FcEmptyTrash /></button>
+                <button><FcCheckmark /></button>
               </>
             )}
           </li>
@@ -113,7 +117,6 @@ function TodoList() { // Declaring a function called TodoList with no parameters
         {todos.map((todo) => (
           <li key={todo.id}>
             {todo.name}
-            <FcCheckmark />
           </li>
         ))}
       </ul>
