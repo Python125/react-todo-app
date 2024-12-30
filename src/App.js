@@ -8,8 +8,8 @@ import { React, useState, useEffect } from 'react';
 import axios from 'axios'; // "axios" is a library that makes it easier to make HTTP requests, such as GET, POST, PUT, and DELETE requests
 import EditTodo from './components/Todo';
 import { FcCheckmark } from "react-icons/fc";
-import { FcEditImage } from "react-icons/fc";
-import { FcEmptyTrash } from "react-icons/fc";
+import { MdEdit } from "react-icons/md";
+import { FaTrash } from "react-icons/fa";
 
 const baseUrl = 'http://localhost:8000/todos'; // This is the URL where your API is running
 const secondaryUrl = 'http://localhost:8000';
@@ -103,8 +103,8 @@ function TodoList() { // Declaring a function called TodoList with no parameters
             ) : (
               <>
                 {todo.name} {/* The todo.name is the name of the todo */}
-                <button onClick={() => setEditId(todo.id)}><FcEditImage /></button>
-                <button onClick={() => handleDelete(todo.id)}><FcEmptyTrash /></button>
+                <button onClick={() => setEditId(todo.id)}><MdEdit /></button>
+                <button onClick={() => handleDelete(todo.id)}><FaTrash /></button>
                 <button><FcCheckmark /></button>
               </>
             )}
@@ -112,14 +112,14 @@ function TodoList() { // Declaring a function called TodoList with no parameters
         ))}
       </ul>
 
-      <h5>Completed</h5>
+      {/* <h5>Completed</h5>
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
             {todo.name}
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 }
