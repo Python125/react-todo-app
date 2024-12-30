@@ -7,6 +7,7 @@ import { React, useState, useEffect } from 'react';
 */
 import axios from 'axios'; // "axios" is a library that makes it easier to make HTTP requests, such as GET, POST, PUT, and DELETE requests
 import EditTodo from './components/Todo';
+import { MdAdd } from "react-icons/md";
 import { FcCheckmark } from "react-icons/fc";
 import { MdEdit } from "react-icons/md";
 import { FaTrash } from "react-icons/fa";
@@ -30,7 +31,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
     "useState('')" creates a new memory space that starts with an empty string
   */
   const [editId, setEditId] = useState(null);
-  const [completedTodo, setCompletedTodo] = useState();
+  // const [completedTodo, setCompletedTodo] = useState();
  
   useEffect(() => {
     axios.get(baseUrl).then((response) => {
@@ -92,7 +93,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
       <h1>Todo List</h1> {/* The h tags (in this case, h1) define HTML headings */}
       <form onSubmit={handleSubmit}>
         <input type="text" value={inputValue} onChange={handleChange} />
-        <button>Add Todo</button> {/* The button tag is used to trigger an action */}
+        <button><MdAdd /></button> {/* The button tag is used to trigger an action */}
       </form>
       <h5>Uncompleted</h5>
       <ul> {/* The ul tags define an unordered list of items */}
