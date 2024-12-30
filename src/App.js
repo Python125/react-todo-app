@@ -31,7 +31,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
     "useState('')" creates a new memory space that starts with an empty string
   */
   const [editId, setEditId] = useState(null);
-  // const [completedTodo, setCompletedTodo] = useState();
+  const [completed, setCompleted] = useState();
  
   useEffect(() => {
     axios.get(baseUrl).then((response) => {
@@ -87,7 +87,9 @@ function TodoList() { // Declaring a function called TodoList with no parameters
       setEditId(null); // Exits the edit mode, therefore returning to its original state
   }
 
-  const handleComplete = (id) => {
+  const toggleComplete = (id) => {
+    const newTodos = [...todos].map(todo => todo.id === id ? { ...todo, completed: !todo.completed }: todo);
+    setCompleted(newTodos);
   }
   
 
@@ -109,7 +111,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
                 {todo.name} {/* The todo.name is the name of the todo */}
                 <button onClick={() => setEditId(todo.id)}><MdEdit /></button>
                 <button onClick={() => handleDelete(todo.id)}><FaTrash /></button>
-                <button onClick={() => handleComplete(todo.id)}><FcCheckmark /></button>
+                <button onClick={() => toggleComplete(todo.id)}><FcCheckmark /></button>
               </>
             )}
           </li>
