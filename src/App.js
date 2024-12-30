@@ -86,6 +86,9 @@ function TodoList() { // Declaring a function called TodoList with no parameters
       });
       setEditId(null); // Exits the edit mode, therefore returning to its original state
   }
+
+  const handleComplete = (id) => {
+  }
   
 
   return ( // The return statement stops the function and sends back whatever is inside the return statement
@@ -106,7 +109,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
                 {todo.name} {/* The todo.name is the name of the todo */}
                 <button onClick={() => setEditId(todo.id)}><MdEdit /></button>
                 <button onClick={() => handleDelete(todo.id)}><FaTrash /></button>
-                <button><FcCheckmark /></button>
+                <button onClick={() => handleComplete(todo.id)}><FcCheckmark /></button>
               </>
             )}
           </li>
