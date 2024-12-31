@@ -88,11 +88,15 @@ function TodoList() { // Declaring a function called TodoList with no parameters
   }
 
   const handleComplete = (id) => {
-    setTodos(
-      todos.map((todo) => {})
-    )
-  }
-  
+    setTodos( // This will update the list of tasks
+      todos.map((todo) => { // Iterate over each todo in the list
+        if (todo.id === id) { // If this task matches the id we want
+          return { ...todo, completed: true }; // Mark it as done
+        }
+        return todo; // If ids don't match, keep it the same
+      })
+    );
+  };
 
   return ( // The return statement stops the function and sends back whatever is inside the return statement
     <div> {/* The div tags define a section in the HTML (JSX) */}
@@ -101,10 +105,10 @@ function TodoList() { // Declaring a function called TodoList with no parameters
         <input type="text" value={inputValue} onChange={handleChange} />
         <button><MdAdd /></button> {/* The button tag is used to trigger an action */}
       </form>
-      <h5>Uncompleted</h5>
+      {/* <h5>Uncompleted</h5> */}
       <ul> {/* The ul tags define an unordered list of items */}
         {todos.map((todo) => (
-          <li key={todo.id}>
+          <li key={todo.id} style={todo.completed ? {textDecoration: "line-through"} : {}}>
             {editId === todo.id ? (
               <EditTodo todo={todo} onSave={handleUpdate} onCancel={() => setEditId(null)} />
             ) : (
@@ -112,7 +116,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
                 {todo.name} {/* The todo.name is the name of the todo */}
                 <button onClick={() => setEditId(todo.id)}><MdEdit /></button>
                 <button onClick={() => handleDelete(todo.id)}><FaTrash /></button>
-                <button onClick={() => handleComplete(todo.id)} aria-pressed="true"><FcCheckmark /></button>
+                <button onClick={() => handleComplete(todo.id)}><FcCheckmark /></button>
               </>
             )}
           </li>
