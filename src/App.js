@@ -7,6 +7,8 @@ import { React, useState, useEffect } from 'react';
 */
 import axios from 'axios'; // "axios" is a library that makes it easier to make HTTP requests, such as GET, POST, PUT, and DELETE requests
 import EditTodo from './components/Todo';
+// import List from './components/List'
+
 import { MdAdd } from "react-icons/md";
 import { FcCheckmark } from "react-icons/fc";
 import { MdEdit } from "react-icons/md";
@@ -31,7 +33,6 @@ function TodoList() { // Declaring a function called TodoList with no parameters
     "useState('')" creates a new memory space that starts with an empty string
   */
   const [editId, setEditId] = useState(null);
-  // const [completed, setCompleted] = useState();
  
   useEffect(() => {
     axios.get(baseUrl).then((response) => {
@@ -88,14 +89,12 @@ function TodoList() { // Declaring a function called TodoList with no parameters
   }
 
   const handleComplete = (id) => {
-    setTodos( // This will update the list of tasks
-      todos.map((todo) => { // Iterate over each todo in the list
-        if (todo.id === id) { // If this task matches the id we want
-          return { ...todo, completed: true }; // Mark it as done
-        }
-        return todo; // If ids don't match, keep it the same
-      })
-    );
+    const newTodos = [...todos].map(todo => todo.id === id ? { ...todo, completed: true } : todo);
+
+    axios.put(`${secondaryUrl}/${id}`, {completed: true})
+      .then(() => {
+        setTodos(newTodos);
+      });
   };
 
   return ( // The return statement stops the function and sends back whatever is inside the return statement
@@ -105,7 +104,6 @@ function TodoList() { // Declaring a function called TodoList with no parameters
         <input type="text" value={inputValue} onChange={handleChange} />
         <button><MdAdd /></button> {/* The button tag is used to trigger an action */}
       </form>
-      {/* <h5>Uncompleted</h5> */}
       <ul> {/* The ul tags define an unordered list of items */}
         {todos.map((todo) => (
           <li key={todo.id} style={todo.completed ? {textDecoration: "line-through"} : {}}>
@@ -122,15 +120,6 @@ function TodoList() { // Declaring a function called TodoList with no parameters
           </li>
         ))}
       </ul>
-
-      {/* <h5>Completed</h5>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>
-            {todo.name}
-          </li>
-        ))}
-      </ul> */}
     </div>
   );
 }
