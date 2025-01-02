@@ -121,6 +121,14 @@ function TodoList() { // Declaring a function called TodoList with no parameters
           </li>
         ))}
       </ul>
+
+      {/* <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            <button onClick={() => handleDelete(todo.id)}><FaTrash /></button>
+          </li>
+        ))}
+      </ul> */}
     </div>
   );
 }
