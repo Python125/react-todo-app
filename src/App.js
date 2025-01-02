@@ -7,7 +7,7 @@ import { React, useState, useEffect } from 'react';
 */
 import axios from 'axios'; // "axios" is a library that makes it easier to make HTTP requests, such as GET, POST, PUT, and DELETE requests
 import EditTodo from './components/Todo';
-// import List from './components/List'
+import List from './components/List';
 
 import { MdAdd } from "react-icons/md";
 import { FcCheckmark } from "react-icons/fc";
@@ -121,6 +121,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
           </li>
         ))}
       </ul>
+      <List />
     </div>
   );
 }
