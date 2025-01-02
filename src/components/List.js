@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 function List({todo, completed}) {
-    // const [list, setList] = useState('');
+    const [completedList, setcompletedList] = useState('');
 
     return (
         <div>
