@@ -14,7 +14,7 @@ import { FcCheckmark } from "react-icons/fc";
 import { MdEdit } from "react-icons/md";
 import { FaTrash } from "react-icons/fa";
 
-const baseUrl = 'http://localhost:8000/todos'; // This is the URL where your API is running
+const baseUrl = 'http://localhost:8000/todos';
 const secondaryUrl = 'http://localhost:8000';
 
 
@@ -91,24 +91,20 @@ function TodoList() { // Declaring a function called TodoList with no parameters
   const handleComplete = (id) => {
     const newTodos = [...todos].map(todo => todo.id === id ? { ...todo, completed: true } : todo);
 
-    axios.put(`${secondaryUrl}/${id}`, {completed: true})
+    axios.put(`${secondaryUrl}/${id}`, { completed: true })
       .then(() => {
         setTodos(newTodos);
       });
   };
 
-  // async function moveCompletedTodo() {
-  //   const completedTodo = {
-  //     id: todos.length + 1,
-  //     name: inputValue.trim(),
-  //   }
+  const moveCompletedTodo = (id, name) => {
+    const newTodos = [...todos].map(todo => todo.id === id ? { ...todo, name: name, completed: true } : todo);
 
-  //   axios.post(baseUrl, completedTodo)
-  //     .then((response) => {
-  //       setTodos([...todos, response.data]);
-  //       setInputValue('');
-  //     })
-  // }
+    axios.put(`${secondaryUrl}/${id}`, { name: name, completed: true })
+      .then(() => {
+        setTodos(newTodos);
+      })
+  }
 
   return ( // The return statement stops the function and sends back whatever is inside the return statement
     <div> {/* The div tags define a section in the HTML (JSX) */}
