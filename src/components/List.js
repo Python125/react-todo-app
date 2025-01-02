@@ -1,26 +1,18 @@
 import React, { useState } from 'react';
+import TodoList from '../App';
 
-function List({todos, completed, uncompleted}) {
-    // const [list, setList] = useState(todo.id);
+export default function List({todo, completed}) {
+    const [completedList, setCompletedList] = useState(todo.id);
 
-    const completedList = (id) => {}
-
-    async function moveCompletedTodo() {
-        const completedTodo = {
-            id: todos.length + 1,
-            name: inputValue.trim(),
-        }
-
-        axios.post(secondaryUrl, completedTodo)
-            .then((response) => {
-                setTodos([...todos, response.data]);
-                setInputValue('');
-        })
-    }
+    // const handleCompletedList = (id) => {}
 
     return (
-        todos ? uncompleted () : completed ()
+        <div>
+        <TodoList />
+            <h5>Completed</h5>
+            <ul>
+                <li></li>
+            </ul>
+        </div>
     )
 }
-
-export default List;
