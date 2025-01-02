@@ -97,6 +97,19 @@ function TodoList() { // Declaring a function called TodoList with no parameters
       });
   };
 
+  // async function moveCompletedTodo() {
+  //   const completedTodo = {
+  //     id: todos.length + 1,
+  //     name: inputValue.trim(),
+  //   }
+
+  //   axios.post(baseUrl, completedTodo)
+  //     .then((response) => {
+  //       setTodos([...todos, response.data]);
+  //       setInputValue('');
+  //     })
+  // }
+
   return ( // The return statement stops the function and sends back whatever is inside the return statement
     <div> {/* The div tags define a section in the HTML (JSX) */}
       <h1>Todo List</h1> {/* The h tags (in this case, h1) define HTML headings */}
