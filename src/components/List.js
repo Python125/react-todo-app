@@ -1,23 +1,12 @@
 import React, { useState } from 'react';
 
 function List({todo, completed, uncompleted}) {
-    const [list, setList] = useState([]);
+    // const [list, setList] = useState(todo.id);
 
+    const completedList = (id) => {}
 
     return (
-        todo ? completed (
-            <div>
-                <ul>
-                    <li></li>
-                </ul>
-            </div>
-        ) : uncompleted (
-            <div>
-                <ul>
-                    <li></li>
-                </ul>
-            </div>
-        )
+        todo ? uncompleted () : completed ()
     )
 }
 

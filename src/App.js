@@ -104,6 +104,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
         <input type="text" value={inputValue} onChange={handleChange} />
         <button><MdAdd /></button> {/* The button tag is used to trigger an action */}
       </form>
+      <h5>Uncompleted</h5>
       <ul> {/* The ul tags define an unordered list of items */}
         {todos.map((todo) => (
           <li key={todo.id} style={todo.completed ? {textDecoration: "line-through"} : {}}>
