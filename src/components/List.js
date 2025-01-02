@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import TodoList from '../App';
 
-export default function List({todo, completed}) {
-    const [completedList, setCompletedList] = useState(todo.id);
+function List({todo, completed, uncompleted}) {
+    // const [list, setList] = useState(todo.id);
 
-    // const handleCompletedList = (id) => {}
+    const completedList = (id) => {}
 
     return (
         <div>
@@ -16,3 +15,5 @@ export default function List({todo, completed}) {
         </div>
     )
 }
+
+export default List;

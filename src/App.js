@@ -7,7 +7,7 @@ import { React, useState, useEffect } from 'react';
 */
 import axios from 'axios'; // "axios" is a library that makes it easier to make HTTP requests, such as GET, POST, PUT, and DELETE requests
 import EditTodo from './components/Todo';
-import List from './components/List'
+// import List from './components/List'
 
 import { MdAdd } from "react-icons/md";
 import { FcCheckmark } from "react-icons/fc";
@@ -19,6 +19,7 @@ const secondaryUrl = 'http://localhost:8000';
 
 
 function TodoList() { // Declaring a function called TodoList with no parameters as input
+// In React, "TodoList" is a component
   const [todos, setTodos] = useState([]); // Creates a list to store multiple todos
   /*
     "todos" is a variable that will store the list of todos - like a box that holds todos
@@ -96,19 +97,6 @@ function TodoList() { // Declaring a function called TodoList with no parameters
       });
   };
 
-  // async function moveCompletedTodo() {
-  //   const completedTodo = {
-  //     id: todos.length + 1,
-  //     name: inputValue.trim(),
-  //   }
-
-  //   axios.post(secondaryUrl, completedTodo)
-  //     .then((response) => {
-  //       setTodos([...todos, response.data]);
-  //       setInputValue('');
-  //     })
-  // }
-
   return ( // The return statement stops the function and sends back whatever is inside the return statement
     <div> {/* The div tags define a section in the HTML (JSX) */}
       <h1>Todo List</h1> {/* The h tags (in this case, h1) define HTML headings */}
@@ -133,7 +121,6 @@ function TodoList() { // Declaring a function called TodoList with no parameters
           </li>
         ))}
       </ul>
-      <List />
     </div>
   );
 }
