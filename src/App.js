@@ -99,8 +99,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
 
   const moveCompletedTodo = (id, name) => {
     const newTodos = [...todos].map(todo => todo.id === id ? { ...todo, name: name, completed: true } : todo);
-
-    axios.put(`${secondaryUrl}/${id}`, { name: name }, { completed: true })
+    axios.put(`${secondaryUrl}/${id}`, { name: name, completed: true })
       .then(() => {
         setTodos(newTodos);
       });
