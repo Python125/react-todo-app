@@ -1,4 +1,5 @@
 import React from 'react';
+// import { FaTrash } from "react-icons/fa";
 
 function List({todo, completed}) {
    // const [completedList, setcompletedList] = useState('');
