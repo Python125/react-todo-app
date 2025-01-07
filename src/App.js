@@ -44,6 +44,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
     const newTodo = {
       id: todos.length + 1,
       name: inputValue.trim(),
+      completed: false,
     }
 
     axios.post(baseUrl, newTodo)
@@ -90,6 +91,14 @@ function TodoList() { // Declaring a function called TodoList with no parameters
   //       setTodos(newTodos);
   //     });
   // }
+
+  const incomplete = todos.filter(todo => {
+    if (todo.completed === false) {
+      return true;
+    } else {
+      return false;
+    }
+  })
 
   return ( // The return statement stops the function and sends back whatever is inside the return statement
     <div>

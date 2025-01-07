@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // import { FaTrash } from "react-icons/fa";
 
 // Take in the array of todos by name and add it to the completed list
@@ -14,7 +14,7 @@ function List(props) { // props.todos
             <h5>Completed</h5>
             <ul>
                 {completed.map(complete => {
-                    return <li>{complete}</li>
+                    return <li key={complete.name}>{complete.name}</li>
                 })}
             </ul>
         </div>
