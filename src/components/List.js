@@ -6,13 +6,9 @@ import { FaTrash } from "react-icons/fa";
 // In the todos array, you need to filter out the todo list items that are complete by using a conditional statement
 
 function List(props) { // props.todos
-    const completed = props.todos.filter(completedTodo => completedTodo.completed);
+    const completed = props.todos.filter(todo => todo.completed);
 
     //const handleUndo = (id) => {}
-
-    // const handleDeleteCompleted = (id) => {
-    //     const completedTodos = [...completed].filter();
-    // }
 
     return (
         <div>
@@ -21,7 +17,7 @@ function List(props) { // props.todos
                 {completed.map(complete => {
                     return <li>{complete.name}
                                 <button><FcUndo /></button>
-                                <button><FaTrash /></button>
+                                <button onClick={() => props.handleDelete(complete.id)}><FaTrash /></button>
                             </li>
                 })}
             </ul>

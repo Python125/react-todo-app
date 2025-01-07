@@ -116,7 +116,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
           </li>
         ))}
       </ul>
-      <List todos={todos} />
+      <List todos={todos} handleDelete={handleDelete} />
     </div>
   );
 }
