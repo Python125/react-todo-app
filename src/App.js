@@ -102,11 +102,11 @@ function TodoList() { // Declaring a function called TodoList with no parameters
       });
   };
 
-  const incomplete = todos.filter(todo => {
-    if (todo.completed === false) {
-      return true;
+  const incomplete = todos.filter(todo => { // Creates a new array, goes through each item in the array
+    if (todo.completed === false) { // Checks to see if the todo's value is false
+      return true; // If the todo's value is false, the item is returned
     } else {
-      return false;
+      return false; // If the todo's value is true, the item is not returned
     }
   })
 
@@ -135,7 +135,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
       <h5>Incompleted</h5>
       <ul>
         {incomplete.map((todo) => (
-          <li key={todo.id} style={todo.completed ? {textDecoration: "line-through"} : {}}>
+          <li key={todo.id}>
             {editId === todo.id ? (
               <EditTodo todo={todo} onSave={handleUpdate} onCancel={() => setEditId(null)} />
             ) : (
