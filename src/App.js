@@ -56,8 +56,14 @@ function TodoList() { // Declaring a function called TodoList with no parameters
 
   if (!todos) return "No post!";
 
-  const handleDelete = (id) => {
-    const newTodos = [...todos].filter(todo => todo.id !== id); // Creates a new array of todos where the todo with the matching id is removed
+  const handleDelete = (id) => { // Declares a function and takes an id as input
+    const newTodos = [...todos].filter(todo => { // Creates a new array, goes through each item in the array
+      if (todo.id === id) { // Checks to see if the id exists in the array
+        return false; // If the id exists, the item is removed
+      } else {
+        return true; // If the id does not exist, the item is not removed
+      }
+    });
 
     axios.delete(`${baseUrl}/${id}`)
       .then(() => {
@@ -65,22 +71,34 @@ function TodoList() { // Declaring a function called TodoList with no parameters
       });
   }
 
-  const handleUpdate = (id, name) => {
-    const newTodos = [...todos].map(todo => todo.id === id ? { ...todo, name: name } : todo); // Creates a new array of todos where the todo with the matching id has its name updated
+  const handleUpdate = (id, name) => { // Declares a function and takes an id and name as input
+    const newTodos = [...todos].map(todo => { // Creates a new array, goes through each item in the array
+      if (todo.id === id) { // Checks to see if the id exists in the array
+        return { ...todo, name: name }; // If the id exists, the item is updated to the new name
+      } else {
+        return todo; // If the id does not exist, the item is not updated
+      }
+    })
 
-    axios.put(`${secondaryUrl}/${id}`, { name: name }) // Sends a PUT request to update the todo on the server
+    axios.put(`${secondaryUrl}/${id}`, { name: name })
       .then(() => {
-        setTodos(newTodos); // This updates the todos list with the new todos
+        setTodos(newTodos); // Updates the todos list with the new values
       });
-      setEditId(null); // Exits the edit mode, therefore returning to its original state
+      setEditId(null);
   }
 
-  const handleComplete = (id) => {
-    const newTodos = [...todos].map(todo => todo.id === id ? { ...todo, completed: true } : todo);
+  const handleComplete = (id) => { // Declares a function and takes an id as input
+    const newTodos = [...todos].map(todo => { // Creates a new array, goes through each item in the array
+      if (todo.id === id) { // Checks to see if the id exists in the array
+        return { ...todo, completed: true }; // If the id exists, the todo's value is updated to true
+      } else {
+        return todo; // If the id does not exist, the todo's value is returned
+      }
+    })
 
     axios.put(`${secondaryUrl}/${id}`, { completed: true })
       .then(() => {
-        setTodos(newTodos);
+        setTodos(newTodos); // Updates the todos list with the new values
       });
   };
 
@@ -91,6 +109,21 @@ function TodoList() { // Declaring a function called TodoList with no parameters
       return false;
     }
   })
+
+  const handleUndo = (id) => { // Declares a function and takes an id as input
+    const newTodos = [...todos].map(todo => { // Creates a new array, goes through each item in the array
+      if (todo.id === id) { // Checks to see if the id exists in the array
+        return { ...todo, completed: false }; // If the id exists, the todo's value is updated to false
+      } else {
+        return todo; // If the id does not exist, the todo's value is returned
+      }
+    })
+    
+    axios.put(`${secondaryUrl}/${id}`, { completed: false })
+      .then(() => {
+        setTodos(newTodos); // Updates the todos list with the new values
+      });
+  }
 
   return ( // The return statement stops the function and sends back whatever is inside the return statement
     <div>
@@ -116,7 +149,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
           </li>
         ))}
       </ul>
-      <List todos={todos} handleDelete={handleDelete} />
+      <List todos={todos} handleDelete={handleDelete} handleUndo={handleUndo} />
     </div>
   );
 }
