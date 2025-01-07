@@ -84,14 +84,6 @@ function TodoList() { // Declaring a function called TodoList with no parameters
       });
   };
 
-  // const moveCompletedTodo = (id, name) => {
-  //   const newTodos = [...todos].map(todo => todo.id === id ? { ...todo, name: name, completed: true } : todo);
-  //   axios.put(`${secondaryUrl}/${id}`, { name: name, completed: true })
-  //     .then(() => {
-  //       setTodos(newTodos);
-  //     });
-  // }
-
   const incomplete = todos.filter(todo => {
     if (todo.completed === false) {
       return true;
@@ -109,7 +101,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
       </form>
       <h5>Incompleted</h5>
       <ul>
-        {todos.map((todo) => (
+        {incomplete.map((todo) => (
           <li key={todo.id} style={todo.completed ? {textDecoration: "line-through"} : {}}>
             {editId === todo.id ? (
               <EditTodo todo={todo} onSave={handleUpdate} onCancel={() => setEditId(null)} />
