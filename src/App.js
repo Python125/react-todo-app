@@ -11,9 +11,8 @@ import { MdEdit } from "react-icons/md";
 import { FaTrash } from "react-icons/fa";
 
 const baseUrl = process.env.BASE_URL;
-//const secondaryUrl = process.env.SECONDARY_URL;
 
-
+console.log(`Requesting: ${baseUrl}/todos`);
 function TodoList() {
   const [todos, setTodos] = useState([]); // Creates a list to store multiple todos
   const [inputValue, setInputValue] = useState(''); // Creates a variable to store the new list item
