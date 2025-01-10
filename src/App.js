@@ -10,9 +10,10 @@ import { FcCheckmark } from "react-icons/fc";
 import { MdEdit } from "react-icons/md";
 import { FaTrash } from "react-icons/fa";
 
-const baseUrl = process.env.BASE_URL;
+const baseUrl = process.env.REACT_APP_BASE_URL;
 
-console.log(`Requesting: ${baseUrl}/todos`);
+console.log(`Base URL: ${baseUrl}`);
+
 function TodoList() {
   const [todos, setTodos] = useState([]); // Creates a list to store multiple todos
   const [inputValue, setInputValue] = useState(''); // Creates a variable to store the new list item
