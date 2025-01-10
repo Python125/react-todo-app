@@ -11,7 +11,7 @@ import { MdEdit } from "react-icons/md";
 import { FaTrash } from "react-icons/fa";
 
 const baseUrl = process.env.BASE_URL;
-const secondaryUrl = process.env.SECONDARY_URL;
+//const secondaryUrl = process.env.SECONDARY_URL;
 
 
 function TodoList() {
@@ -21,7 +21,7 @@ function TodoList() {
   const [editId, setEditId] = useState(null);
  
   useEffect(() => {
-    axios.get(baseUrl).then((response) => {
+    axios.get(`${baseUrl}/todos`).then((response) => {
       setTodos(response.data);
     });
   }, []);
@@ -47,7 +47,7 @@ function TodoList() {
       completed: false,
     }
 
-    axios.post(baseUrl, newTodo)
+    axios.post(`${baseUrl}/todos`, newTodo)
       .then((response) => {
         setTodos([...todos, response.data]);
         setInputValue('');
@@ -65,7 +65,7 @@ function TodoList() {
       }
     });
 
-    axios.delete(`${baseUrl}/${id}`)
+    axios.delete(`${baseUrl}/todos/${id}`)
       .then(() => {
         setTodos(newTodos);
       });
@@ -80,7 +80,7 @@ function TodoList() {
       }
     })
 
-    axios.put(`${secondaryUrl}/${id}`, { name: name })
+    axios.put(`${baseUrl}/${id}`, { name: name })
       .then(() => {
         setTodos(newTodos); // Updates the todos list with the new values
       });
@@ -96,7 +96,7 @@ function TodoList() {
       }
     })
 
-    axios.put(`${secondaryUrl}/${id}`, { completed: true })
+    axios.put(`${baseUrl}/${id}`, { completed: true })
       .then(() => {
         setTodos(newTodos); // Updates the todos list with the new values
       });
@@ -119,7 +119,7 @@ function TodoList() {
       }
     })
     
-    axios.put(`${secondaryUrl}/${id}`, { completed: false })
+    axios.put(`${baseUrl}/${id}`, { completed: false })
       .then(() => {
         setTodos(newTodos); // Updates the todos list with the new values
       });
