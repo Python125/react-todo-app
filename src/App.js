@@ -10,11 +10,11 @@ import { FcCheckmark } from "react-icons/fc";
 import { MdEdit } from "react-icons/md";
 import { FaTrash } from "react-icons/fa";
 
-const baseUrl = 'http://localhost:8000/todos';
-const secondaryUrl = 'http://localhost:8000';
+const baseUrl = process.env.BASE_URL;
+const secondaryUrl = process.env.SECONDARY_URL;
 
 
-function TodoList() { // Declaring a function called TodoList with no parameters as input
+function TodoList() {
   const [todos, setTodos] = useState([]); // Creates a list to store multiple todos
   const [inputValue, setInputValue] = useState(''); // Creates a variable to store the new list item
 
@@ -56,7 +56,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
 
   if (!todos) return "No post!";
 
-  const handleDelete = (id) => { // Declares a function and takes an id as input
+  const handleDelete = (id) => {
     const newTodos = [...todos].filter(todo => { // Creates a new array, goes through each item in the array
       if (todo.id === id) { // Checks to see if the id exists in the array
         return false; // If the id exists, the item is removed
@@ -71,7 +71,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
       });
   }
 
-  const handleUpdate = (id, name) => { // Declares a function and takes an id and name as input
+  const handleUpdate = (id, name) => {
     const newTodos = [...todos].map(todo => { // Creates a new array, goes through each item in the array
       if (todo.id === id) { // Checks to see if the id exists in the array
         return { ...todo, name: name }; // If the id exists, the item is updated to the new name
@@ -87,7 +87,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
       setEditId(null);
   }
 
-  const handleComplete = (id) => { // Declares a function and takes an id as input
+  const handleComplete = (id) => {
     const newTodos = [...todos].map(todo => { // Creates a new array, goes through each item in the array
       if (todo.id === id) { // Checks to see if the id exists in the array
         return { ...todo, completed: true }; // If the id exists, the todo's value is updated to true
@@ -110,7 +110,7 @@ function TodoList() { // Declaring a function called TodoList with no parameters
     }
   })
 
-  const handleUndo = (id) => { // Declares a function and takes an id as input
+  const handleUndo = (id) => {
     const newTodos = [...todos].map(todo => { // Creates a new array, goes through each item in the array
       if (todo.id === id) { // Checks to see if the id exists in the array
         return { ...todo, completed: false }; // If the id exists, the todo's value is updated to false
