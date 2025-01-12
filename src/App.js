@@ -83,8 +83,8 @@ function TodoList() {
     axios.put(`${baseUrl}/${id}`, { name: name })
       .then(() => {
         setTodos(newTodos); // Updates the todos list with the new values
+        setEditId(null);
       });
-      setEditId(null);
   }
 
   const handleComplete = (id) => {
